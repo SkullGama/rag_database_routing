@@ -19,7 +19,7 @@ DatabaseType = Literal["products", "support", "finance"]
 PERSIST_DIRECTORY = "db_storage"
 
 @dataclass
-class CollectionConfig:
+class CollectionConfig: #read again abt this 
     name: str
     description: str
     collection_name: str  # This will be used as Qdrant collection name
