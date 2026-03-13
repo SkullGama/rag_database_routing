@@ -24,6 +24,7 @@ class CollectionConfig:
     description: str
     collection_name: str  # This will be used as Qdrant collection name
     
+    # Collection configurations
     COLLECTIONS: Dict[DatabaseType, CollectionConfig] = {
     "products": CollectionConfig(
         name="Product Information",
@@ -41,3 +42,13 @@ class CollectionConfig:
         collection_name="finance_collection"
     )
 }
+
+def initialize_models():
+    """Initialize OpenAI models and Qdrant client"""
+    if (st.session_state.openai_api_key and 
+        st.session_state.qdrant_url and 
+        st.session_state.qdrant_api_key):
+        
+        os.environ["OPENAI_API_KEY"] = st.session_state.openai_api_key
+        st.session_state.embeddings = OpenAIEmbeddings(model="text-embedding-3-small")
+        st.session_state.llm = ChatOpenAI(temperature=0)
